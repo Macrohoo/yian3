@@ -1,0 +1,63 @@
+{
+  "name": "yian3",
+  "version": "1.0.0",
+  "description": "vue3 super hooks",
+  "author": "Macrohoo",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "unpkg": "dist/yian.min.js",
+  "files": [
+    "lib",
+    "es",
+    "typings/global.d.ts"
+  ],
+  "scripts": {
+    "lint": "eslint --fix --ext .js,.vue src",
+    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs",
+    "esm": "tsc -p tsconfig.json",
+    "cjs": "tsc -p tsconfig-cjs.json"
+  },
+  "devDependencies": {
+    "@ant-design/icons-vue": "6.1.0",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.3",
+    "@typescript-eslint/parser": "^5.30.3",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "ant-design-vue": "3.2.3",
+    "axios": "0.27.2",
+    "babel-loader": "^8.2.5",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-vue": "^9.1.1",
+    "postcss-loader": "^7.0.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "vue": "3.2.25",
+    "vue-loader": "^17.0.0",
+    "vue-template-compiler": "^2.7.0",
+    "vue-tsc": "^0.38.2",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "peerDependencies": {
+    "@ant-design/icons-vue": ">=6.1.0",
+    "ant-design-vue": ">=3.2.3",
+    "axios": ">=0.27.2",
+    "vue": ">=3.2.25"
+  },
+  "keywords": [
+    "yian",
+    "yian3",
+    "vueComponent",
+    "component",
+    "components",
+    "antd"
+  ]
+}
