@@ -30,5 +30,9 @@ export default abstract class Yian {
   }
 
 
+  static registerComponent() {
+
+  }
+
 
 }
