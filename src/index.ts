@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import YianConstructor from './constructor'
+//import { createApp } from 'vue'
+import YianConstructor from '@/constructor'
 import { ConfigTy } from '~/base'
 
 
@@ -19,7 +19,7 @@ export default abstract class Yian {
 
   static getProxy(config: ConfigTy = {}) {
     var _Proxy = new Proxy(new YianConstructor(config), {
-      get: function(target: ConfigTy, property: keyof ConfigTy, receiver) {
+      get: function(target: ConfigTy, property: keyof ConfigTy, _receiver) {
         if(property in target) {
           return target[property]  //the instance attributes of youstructor, such as utils
         }

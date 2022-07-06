@@ -7,16 +7,18 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "unpkg": "dist/yian.min.js",
+  "types": "index.d.ts",
   "files": [
     "lib",
     "es",
-    "typings/global.d.ts"
+    "index.d.ts",
+    "typings"
   ],
   "scripts": {
     "lint": "eslint --fix --ext .js,.vue src",
     "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs",
-    "esm": "tsc -p tsconfig.json",
-    "cjs": "tsc -p tsconfig-cjs.json"
+    "esm": "gulp tsc-es",
+    "cjs": "gulp tsc-cjs"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -33,8 +35,13 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^9.1.1",
+    "gulp": "^4.0.2",
+    "gulp-path-alias": "^1.2.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "postcss-loader": "^7.0.0",
     "progress-bar-webpack-plugin": "^2.1.0",
+    "rimraf": "^3.0.2",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "ts-loader": "^9.3.1",
