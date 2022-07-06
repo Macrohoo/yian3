@@ -1,8 +1,5 @@
-//import { createApp } from 'vue'
 import YianConstructor from '@/constructor'
 import { ConfigTy } from '~/base'
-
-
 
 export default abstract class Yian {
   static components: object
@@ -27,11 +24,6 @@ export default abstract class Yian {
       }
     })
     return _Proxy
-  }
-
-
-  static registerComponent() {
-
   }
 
 

@@ -49,3 +49,5 @@
 ```
 ##### 11、_ before parmas (_parmas to tell TypeScript “是的，我知道这个参数没有被使用，这不是一个错误”)
 ##### 12、gulp.task('tsc-cjs', ...）create a `gulp tsc-cjs` terminal command
+##### 13、import type 仅仅导入被用于类型注解或声明的声明语句，它总是会被完全删除，因此在运行时将不会留下任何代码。与此相似，export type 仅仅提供一个用于类型的导出，在 TypeScript 输出文件中，它也将会被删除
+##### 14、globalRegister.ts as UMD entry file, all components need to be registered as global components. needn't care es and lib, reserve part import feature.

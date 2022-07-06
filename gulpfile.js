@@ -42,3 +42,11 @@ gulp.task('tsc-cjs', () => {
   .pipe(gulp.dest('lib'));
   }
 );
+
+const sass = require('gulp-sass')(require('sass'));
+
+gulp.task('build-style', () => {
+  return gulp.src('src/components/style.scss')
+  .pipe(sass().on('error', sass.logError))
+  .pipe(gulp.dest('dist'));
+})

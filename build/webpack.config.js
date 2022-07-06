@@ -6,7 +6,7 @@ module.exports = {
   optimization: {
     minimize: false      //代码打包不压缩
   },
-  entry: "./src/index.ts",
+  entry: "./src/globalRegister.ts",
   output: {
     path: path.resolve(__dirname, '../dist'),
     //path: path.resolve(__dirname, '../../ytab/yiandist'),
@@ -45,9 +45,23 @@ module.exports = {
         },
       },
       {
-        test: /\.ts$/,
-        loader: 'ts-loader',
-        options: { appendTsSuffixTo: [/\.vue$/] }
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ["@babel/preset-env"]
+            },
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              appendTsSuffixTo: [/\.vue$/]
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,

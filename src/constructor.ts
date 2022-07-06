@@ -1,3 +1,5 @@
+import utils from '@/utils/utils'
+
 import { AxiosOptionsTy } from '~/axios'
 import { ConfigTy } from '~/base'
 
@@ -5,10 +7,12 @@ import { ConfigTy } from '~/base'
 export default class YianConstructor {
   interceptor: any
   baseApi: Array<string>
+  utils: object
 
   constructor(config: ConfigTy) {
     this.interceptor = config.service
     this.baseApi = config.baseApi!
+    this.utils = utils
   }
 
   axios<T>(options: AxiosOptionsTy) :Promise<T>{

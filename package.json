@@ -16,9 +16,10 @@
   ],
   "scripts": {
     "lint": "eslint --fix --ext .js,.vue src",
-    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs",
+    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs && npm run build:style",
     "esm": "gulp tsc-es",
-    "cjs": "gulp tsc-cjs"
+    "cjs": "gulp tsc-cjs",
+    "build:style": "gulp build-style"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -37,6 +38,7 @@
     "eslint-plugin-vue": "^9.1.1",
     "gulp": "^4.0.2",
     "gulp-path-alias": "^1.2.1",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "postcss-loader": "^7.0.0",
