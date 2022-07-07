@@ -1,0 +1,16 @@
+.ya-dialog {
+  .ant-modal-header {
+    border-bottom: 0px;
+    .ant-modal-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .ant-modal-footer {
+    border-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

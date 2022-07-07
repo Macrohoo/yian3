@@ -161,6 +161,17 @@ function mobileCheck(mobile: number): boolean {
   return reg.test(String(mobile));
 }
 
+//事件绑定支持IE、chromium、事件委托 (element绑定dom, event事件类型, listener方法)
+function addEvent(element: any, event: string, listener: Function, capture = false): void {
+  if (element.addEventListener) {
+    element.addEventListener(event, listener, capture);
+  } else if (element.attachEvent) {
+    element.attachEvent(`on${event}`, listener);
+  } else {
+    element[`on${event}`] = listener;
+  }
+}
+
 
 export default {
   copyData,
@@ -168,5 +179,6 @@ export default {
   formatUTCTime,
   getDateDiff,
   unique,
-  mobileCheck
+  mobileCheck,
+  addEvent
 }

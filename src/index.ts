@@ -1,8 +1,10 @@
 import YianConstructor from '@/constructor'
 import { ConfigTy } from '~/base'
 
+import type { DefineComponent } from 'vue';
+
 export default abstract class Yian {
-  static components: object
+  static components: any
   static install: Function
 
   static _validator: WeakMap<object, any>
@@ -26,5 +28,14 @@ export default abstract class Yian {
     return _Proxy
   }
 
+  static getComponent(moduleName: string, popupModifier: string) {
+    const key = moduleName + '_' + popupModifier;
+    return this.components[key] || false
+  }
+
+  static setComponent(moduleName: string, popupModifier: string, component: DefineComponent) {
+    const key = moduleName + '_' + popupModifier;
+    this.components[key] = component
+  }
 
 }
