@@ -5,9 +5,10 @@
 ##### 5、setted paths still console error @/xxx can't find module, please reload vscode
 ##### 6、types、typings in package.json is the same meaning. The main declaration file is specified in the package.json file. Set the types attribute to point to the bundle's main declaration file. 同样要注意的是如果主声明文件名是index.d.ts并且位置在包的根目录里（与index.js并列），你可以不使用"types"属性指定。
 ##### 7、rimraf需要单独安装用来打包前删除dist文件夹 `rimraf -rf ./dist`
-##### 8、@rollup/plugin-commonjs 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
-##### 9、`.pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}))` generate .map file. otherwise map in js file
-##### 10、tsconfig.json
+##### 8、tsc- Do not compile alias path, i choose gulp to handle it
+##### 9、@rollup/plugin-commonjs 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+##### 10、`.pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}))` generate .map file. otherwise map in js file
+##### 11、tsconfig.json
 ```
 {
   "compilerOptions": {
@@ -47,7 +48,7 @@
   "exclude": ["node_modules", "dist"]
 }
 ```
-##### 11、_ before parmas (_parmas to tell TypeScript “是的，我知道这个参数没有被使用，这不是一个错误”)
-##### 12、gulp.task('tsc-cjs', ...）create a `gulp tsc-cjs` terminal command
-##### 13、import type 仅仅导入被用于类型注解或声明的声明语句，它总是会被完全删除，因此在运行时将不会留下任何代码。与此相似，export type 仅仅提供一个用于类型的导出，在 TypeScript 输出文件中，它也将会被删除
-##### 14、globalRegister.ts as UMD entry file, all components need to be registered as global components. needn't care es and lib, reserve part import feature.
+##### 12、_ before parmas (_parmas to tell TypeScript “是的，我知道这个参数没有被使用，这不是一个错误”)
+##### 13、gulp.task('tsc-cjs', ...）create a `gulp tsc-cjs` terminal command
+##### 14、import type 仅仅导入被用于类型注解或声明的声明语句，它总是会被完全删除，因此在运行时将不会留下任何代码。与此相似，export type 仅仅提供一个用于类型的导出，在 TypeScript 输出文件中，它也将会被删除
+##### 15、globalRegister.ts as UMD entry file, all components need to be registered as global components. needn't care es and lib, reserve part import feature.

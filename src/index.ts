@@ -28,13 +28,13 @@ export default abstract class Yian {
     return _Proxy
   }
 
-  static getComponent(moduleName: string, popupModifier: string) {
-    const key = moduleName + '_' + popupModifier;
+  static getComponent(moduleName: string, dialogModifier: string) {
+    const key = moduleName + '_' + dialogModifier;
     return this.components[key] || false
   }
 
-  static setComponent(moduleName: string, popupModifier: string, component: DefineComponent) {
-    const key = moduleName + '_' + popupModifier;
+  static setComponent(moduleName: string, dialogModifier: string, component: DefineComponent) {
+    const key = moduleName + '_' + dialogModifier;
     this.components[key] = component
   }
 

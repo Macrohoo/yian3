@@ -7,7 +7,7 @@ const YaDialog = defineComponent({
   props: {
     title: {
       type: String,
-      default: '操作窗口'
+      default: '窗口名称'
     },
     //浮窗距离顶部的距离，单位是vh
     top: {
