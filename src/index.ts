@@ -1,7 +1,8 @@
 import YianConstructor from '@/constructor'
 import { ConfigTy } from '~/base'
 
-import type { DefineComponent } from 'vue';
+import type { DefineComponent, Component, ComputedOptions, MethodOptions } from 'vue';
+import { createApp } from 'vue'
 
 export default abstract class Yian {
   static components: any
@@ -18,8 +19,8 @@ export default abstract class Yian {
 
   static getProxy(config: ConfigTy = {}) {
     var _Proxy = new Proxy(new YianConstructor(config), {
-      get: function(target: ConfigTy, property: keyof ConfigTy, _receiver) {
-        if(property in target) {
+      get: function (target: ConfigTy, property: keyof ConfigTy, _receiver) {
+        if (property in target) {
           return target[property]  //the instance attributes of youstructor, such as utils
         }
         //else todo
@@ -36,6 +37,13 @@ export default abstract class Yian {
   static setComponent(moduleName: string, dialogModifier: string, component: DefineComponent) {
     const key = moduleName + '_' + dialogModifier;
     this.components[key] = component
+  }
+
+  static getVue3Vm(componentModal: any, props?: any) {
+    //Pass props to the root component when the application instance is created
+    const instance = createApp(componentModal, props)
+    //after mounted on div is vm
+    return instance.mount(document.createElement('div'))
   }
 
 }

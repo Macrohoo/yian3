@@ -26,7 +26,7 @@ const YaDialog = defineComponent({
       type: String,
       default: '确定'
     },
-    // ComponentConstructor构造函数
+    // vue.2 ComponentConstructor构造函数 / vue.3 也能渲染注册过的组件
     content: {
       type: [Object, Function]
     },
@@ -36,27 +36,37 @@ const YaDialog = defineComponent({
     return {
       visible: true,
       affirm: false,
-      customStyle: {"top": `${top}vh`}
+      customStyle: {"top": `${top}vh`},
     };
   },
   methods: {
-    handleClosed() {
+    handleCancel() {
       this.visible = false;
     },
     async handleOk() {
       this.affirm = true;
       try {
+        //if promise existed
+        //@ts-ignore
+        if(this.$refs.cpo!.submit) {
+          //@ts-ignore
+          await this.$refs.cpo!.submit()
+        }
         //@ts-ignore
         await this.$refs.cpo.affirm(this);   // 关闭窗口交给子component
       } catch (error) {
         console.error('affirm事件不存在[Please define affirm event in the component]!', error);
       }
+    },
+    //if promise need waited post
+    async waitPost() {
+
     }
   },
   render() {
     const { title, hideFooter, customStyle, width, okText, content, value } = this
     return(
-      <a-modal dialogClass={'ya-dialog'} bodyStyle={customStyle} v-model:visible="visible" title={title} width={width} footer={hideFooter ? null : 'true'} okText={okText} on-ok="handleOk" >
+      <a-modal dialogClass={'ya-dialog'} bodyStyle={customStyle} v-model:visible="visible" title={title} width={width} footer={hideFooter ? null : 'true'} okText={okText} on-ok="handleOk" on-cancel="handleCancel">
         <component ref="cpo" is={content} v-model={value}></component>
       </a-modal>
 
