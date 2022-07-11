@@ -9,10 +9,10 @@ const dialogDirective: any = {
     //@ts-ignore
     created(el, binding, vnode) {
       let key = vnode.elm.id
+      if(!key) return console.error('id属性不存在!');
       dialogDirective._store[key] = binding.value || {}  //binding.value传递给指令的值
       utils.addEvent(el, 'click', () => {
         const value = dialogDirective._store[key]
-        const action = el.getAttribute('action') ?? null; // 父组件上的回调事件名称
         const title = el.getAttribute('title') ?? '窗口名称'; // 获取窗口标题
         const hideFooter = el.getAtrribute('hideFooter') ?? false; // 是否取消底部
         const okText = el.getAttribute('okText') ?? '确定'; // 确认按钮文案
@@ -26,7 +26,6 @@ const dialogDirective: any = {
           if(moduleComponentContent) {
             const instance = Yian.getVue3Vm(modal, {
               value,
-              action,
               title,
               hideFooter,
               okText,
@@ -43,10 +42,9 @@ const dialogDirective: any = {
               vm.$root.$el.removeChild(domDiv);
 
               //@ts-ignore
-              // if (instance.affirm) {
-              //   vm.reload ? vm.reload() : false; // If the context object routing for rendering template template needs to be overloaded
-              //   vm[action] ? vm[action].apply(vm, [key, value]) : false;
-              // }
+              if(instance.affirm && vm.hasOwnProperty('reload')) {
+                vm.reload() // If the context object routing for rendering template template needs to be overloaded
+              }
             });
 
           } else {
@@ -56,6 +54,20 @@ const dialogDirective: any = {
           console.error('module属性名称或v-dialog指令修饰符不能为空!');
         }
       })
+    },
+
+    // 需要考虑到vnode更新的情况(这种是vnode更新，但是按钮组件并没有销毁重建的情况，那我们需要去触发这个钩子来对store中的数据进行重新赋值)
+    // 因为可能传入的value是一个变动的值，需要更新_store中的值
+    //@ts-ignore
+    beforeUpdate(el, binding, vnode, prevNode) {
+      if(binding.value && vnode.elm.id) {
+        delete dialogDirective._store[prevNode.elm.id]
+        dialogDirective._store[vnode.elm.id] = binding.value
+      } else {
+        delete dialogDirective._store[prevNode.elm.id]
+      }
     }
   }
 }
+
+export default dialogDirective
