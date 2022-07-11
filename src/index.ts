@@ -1,9 +1,12 @@
 import YianConstructor from '@/constructor'
 import { ConfigTy } from '~/base'
 
-import type { DefineComponent, Component, ComputedOptions, MethodOptions } from 'vue';
+import type { DefineComponent } from 'vue';
+//Component, ComputedOptions, MethodOptions
 import { createApp } from 'vue'
 
+
+export { installYian } from '@/installYian'
 export default abstract class Yian {
   static components: any
   static install: Function

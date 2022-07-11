@@ -6,5 +6,5 @@ export const withInstall = (comp: DefineComponent<{}, {}, any>) => {
     app.component(c.displayName || c.name, comp);
   };
 
-  return comp
+  return c
 };

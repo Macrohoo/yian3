@@ -66,11 +66,9 @@ const YaDialog = defineComponent({
   render() {
     const { title, hideFooter, customStyle, width, okText, content, value } = this
     return(
-      <a-modal dialogClass={'ya-dialog'} bodyStyle={customStyle} v-model:visible="visible" title={title} width={width} footer={hideFooter ? null : 'true'} okText={okText} on-ok="handleOk" on-cancel="handleCancel">
+      <a-modal dialogClass={'ya-dialog'} bodyStyle={customStyle} vModel_visible={this.visible} title={title} width={width} footer={hideFooter ? null : 'true'} okText={okText} on-ok="handleOk" on-cancel="handleCancel">
         <component ref="cpo" is={content} v-model={value}></component>
       </a-modal>
-
-
     )
   }
 })

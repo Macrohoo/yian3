@@ -45,9 +45,55 @@ export default defineComponent({
       await this.subimt()
       vlm.handleCancel();  //handleClosed方法控制el-dialog窗口关闭
     },
-    //subimt 有需要的异步请求
+    //subimt 点击确定按钮时，有需要的异步请求
     async subimt() {}
   },
 });
 </script>
+```
+
+#### ❤️ 项目结构目录建议
+```
+src
+├── layout //公共布局
+├── router //vue-router
+│   └── index.js
+├── store //piana
+│   └── index.js
+├── styles //公共样式
+│   └── ....scss
+├── icons  //icons目录
+│   ├── common
+│   │   └── xx.svg
+│   └── js
+│       └── symbolIcon.js
+├── components //公用组件
+│   └── ....vue
+├── views  //页面
+│   └── order  //隶属模块名
+│       ├── components //隶属模块子组件
+│       │   └── orderShipping.vue
+│       └── index.js
+├── App.vue
+└── main.ts
+```
+
+#### ❤️ 导入、导出
+> - 隶属模块成块导出注册
+```typescript
+import Yian from 'yian';
+import orderShipping from './components/orderShipping.vue';
+
+export default function registerOrder() {
+  //参数一、参数二 与属性列表中的 module 和 v-popup.[xxx] 指令修饰符需一致
+  Yian.setComponent('order', 'orderShipping', orderShipping);
+}
+```
+> - 打包入口文件中调用注册
+
+```javascript
+//放在main.ts最下面
+import registerOrder from '@/views/order/index.js';
+
+registerOrder()
 ```
