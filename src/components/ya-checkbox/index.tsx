@@ -37,7 +37,7 @@ const YaCheckbox = defineComponent({
     },
     linkSrc: {
       type: String,
-      default: "https://kodo.mboke.top/le-icon-folder.png",
+      default: "../../icons/le-icon-folder.png",    //https://kodo.mboke.top/le-icon-folder.png  可以的静态资源
     },
   },
   data() {

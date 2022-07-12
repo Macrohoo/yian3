@@ -1,3 +1,1 @@
-export default function haha() {
-  console.log('xixix')
-}
+export { default as YaCheckbox } from './ya-checkbox/index'
