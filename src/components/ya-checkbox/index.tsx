@@ -3,6 +3,7 @@ import {
 } from "vue";
 import { withInstall } from "@/components/_util/partRegisterFun";
 import type { DefineComponent } from 'vue';
+import imgObject from '@/icons/imgJson.json'
 
 const YaCheckbox = defineComponent({
   name: "YaCheckbox",
@@ -27,17 +28,17 @@ const YaCheckbox = defineComponent({
       type: Number,
       default: 64,
     },
-    //选择内容与<input>双向绑定
+    //已选中选项与<input>双向绑定
     selectData: {
-      type: [Array, Object],
+      type: Array,
     },
-    //指定<input>元素value的值
+    //指定<input>元素value的值，且部分耦合属性
     options: {
       type: Object,
     },
     linkSrc: {
       type: String,
-      default: "../../icons/le-icon-folder.png",    //https://kodo.mboke.top/le-icon-folder.png  可以的静态资源
+      default: imgObject["le-icon-folder"]
     },
   },
   data() {
@@ -74,12 +75,13 @@ const YaCheckbox = defineComponent({
           class="flex flex-direction justify-center align-center"
           style={{ width: `${width}px`, height: `${height}px` }}
         >
+          <img src={imgObject["le-icon-ziluobo"]} class="icon"/>
           <div style="position: relative">
             <img
               class="videoFrame"
-              v-show={linkSrc.length > 200}
+              v-show={options?.type === 'video'}
               style={linkImgStyle}
-              src="https://kodo.mboke.top/svgVideo.svg"
+              src={imgObject["le-icon-video"]}
               onMouseenter={this.hoverChange.bind(this)}
               onMouseleave={this.hoverChange.bind(this)}
             ></img>
@@ -91,7 +93,6 @@ const YaCheckbox = defineComponent({
             ></img>
           </div>
           <span>{options?.name}</span>
-          <span>{options?.title}</span>
         </div>
       </label>
     );

@@ -16,10 +16,12 @@
   ],
   "scripts": {
     "lint": "eslint --fix --ext .js,.vue src",
-    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs && npm run build:style",
+    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs && npm run build:style && npm run assets-copy",
     "esm": "gulp tsc-es",
     "cjs": "gulp tsc-cjs",
-    "build:style": "gulp build-style"
+    "build:style": "gulp build-style",
+    "build:image": "gulp img-base64",
+    "assets-copy": "gulp es-copy && gulp cjs-copy"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -37,9 +39,11 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^9.1.1",
     "gulp": "^4.0.2",
+    "gulp-copy": "^4.0.1",
     "gulp-path-alias": "^1.2.1",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-to-base64": "^1.0.5",
     "gulp-typescript": "^6.0.0-alpha.1",
     "postcss-loader": "^7.0.0",
     "progress-bar-webpack-plugin": "^2.1.0",
