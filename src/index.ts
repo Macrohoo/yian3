@@ -6,7 +6,7 @@ import type { DefineComponent } from 'vue';
 import { createApp } from 'vue'
 
 
-export { installYian } from '@/installYian'
+export { default as createYian } from '@/createYian'
 export default abstract class Yian {
   static components: any
   static install: Function

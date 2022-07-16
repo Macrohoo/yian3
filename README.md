@@ -7,12 +7,9 @@ npm install yian3 -S
 ```typescript
 //main.js
 
-import Yian from 'yian3';
-import { installYian } from 'yian3'
+import { createYian } from 'yian3'
 import 'yian3/dist/style.css';
 /* import service from 'your interceptor filepath' */
-
-app.use(installYian())
 
 const $_Y = {
   /* 一些属性 */
@@ -21,5 +18,6 @@ const $_Y = {
   //举例2:  baseApi: Array<string> [接口前缀，如 '/v2' 或者 '/api'，可填多个组成数组]
 };
 
-app.config.globalProperties.$yian = yian.content($_Y)
+app.use(createYian, $_Y)
+
 ```
