@@ -18,6 +18,6 @@ const $_Y = {
   //举例2:  baseApi: Array<string> [接口前缀，如 '/v2' 或者 '/api'，可填多个组成数组]
 };
 
-app.use(createYian, $_Y)
+app.use(createYian as any, $_Y)
 
 ```
