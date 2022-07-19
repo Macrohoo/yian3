@@ -31,7 +31,7 @@ const dialogDirective: any = {
               okText,
               width,
               top,
-              moduleComponentContent, // registed module component
+              content: moduleComponentContent, // registed module component
               visible: true
             })
             const domDiv = vm.$root.$el.parentNode.appendChild(instance.$el); // Dom element after successful mounting
@@ -40,7 +40,6 @@ const dialogDirective: any = {
               //@ts-ignore
               instance.visible = false;
               vm.$root.$el.removeChild(domDiv);
-
               //@ts-ignore
               if(instance.affirm && vm.hasOwnProperty('reload')) {
                 vm.reload() // If the context object routing for rendering template template needs to be overloaded

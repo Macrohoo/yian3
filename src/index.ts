@@ -4,7 +4,7 @@ import { ConfigTy } from '~/base'
 import type { DefineComponent } from 'vue';
 //Component, ComputedOptions, MethodOptions
 import { createApp } from 'vue'
-import Antd from 'ant-design-vue'
+// import { Modal } from 'ant-design-vue'
 
 export { default as createYian } from '@/createYian'
 export default abstract class Yian {
@@ -45,8 +45,8 @@ export default abstract class Yian {
   static getVue3Vm(componentModal: any, props?: any) {
     //Pass props to the root component when the application instance is created
     const instance = createApp(componentModal, props)
-    //after mounted on div is vm
-    return instance.use(Antd).mount(document.createElement('div'))
+    //after mounted on div is vm, return instance object has $attributes
+    return instance.mount(document.createElement('div'))
   }
 
 }
