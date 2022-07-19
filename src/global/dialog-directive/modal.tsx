@@ -19,8 +19,8 @@ const YaDialog = defineComponent({
       default: true
     },
     width: {
-      type:Number,
-      default: 730
+      type:String,
+      default: '730'
     },
     okText: {
       type: String,

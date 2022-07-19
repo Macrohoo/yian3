@@ -2,7 +2,6 @@ import {
   defineComponent
 } from "vue";
 import { withInstall } from "@/components/_util/partRegisterFun";
-import type { DefineComponent } from 'vue';
 import imgObject from '@/icons/imgJson.json'
 
 const YaCheckbox = defineComponent({
@@ -100,4 +99,4 @@ const YaCheckbox = defineComponent({
 });
 
 
-export default withInstall(YaCheckbox as DefineComponent<{}, {}, any>);
+export default withInstall(YaCheckbox);

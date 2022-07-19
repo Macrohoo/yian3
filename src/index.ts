@@ -4,19 +4,17 @@ import { ConfigTy } from '~/base'
 import type { DefineComponent } from 'vue';
 //Component, ComputedOptions, MethodOptions
 import { createApp } from 'vue'
-
+import Antd from 'ant-design-vue'
 
 export { default as createYian } from '@/createYian'
 export default abstract class Yian {
-  static components: any
+  static components: Record<string, DefineComponent<any, any, any, any, any, any, any, any, any, any, any>> = {}
   static install: Function
 
-  static _validator: WeakMap<object, any>
-  static _upload: boolean
+  static _validator: WeakMap<object, any> = new WeakMap()
+  static _upload: boolean = false
 
   static content(config: ConfigTy = {}) {
-    this._validator = new WeakMap()
-    this._upload = false
     return this.getProxy(config)
   }
 
@@ -37,16 +35,18 @@ export default abstract class Yian {
     return this.components[key] || false
   }
 
-  static setComponent(moduleName: string, dialogModifier: string, component: DefineComponent) {
+  static setComponent(moduleName: string, dialogModifier: string, component: DefineComponent<any, any, any, any, any, any, any, any, any, any, any>) {
     const key = moduleName + '_' + dialogModifier;
     this.components[key] = component
+    //register component
+
   }
 
   static getVue3Vm(componentModal: any, props?: any) {
     //Pass props to the root component when the application instance is created
     const instance = createApp(componentModal, props)
     //after mounted on div is vm
-    return instance.mount(document.createElement('div'))
+    return instance.use(Antd).mount(document.createElement('div'))
   }
 
 }
