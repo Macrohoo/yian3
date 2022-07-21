@@ -97,3 +97,11 @@ import registerOrder from '@/views/order/index.js';
 
 registerOrder()
 ```
+
+
+
+//记录一下思路
+//现在的难点是modal的vm生成，并不像vue2那样vm生成实在后拥有共享antd的基础组件，因为vue2中是Vue.use实现的。包括vue3版本的antd和element库因为vue3的底层的写法变动，导致组件组册生成新的vm自定义挂载的方式不再可行。
+//借助组合api的方式，利用内部组件实例的config.globalProperties下的暴露出来的自己的核心yian库上的属性，我去暂存起来想要的props，不再通过父子组件间的传值获得，但需要注意本身props可能存在的默认值。
+//然后就是在指令click的时候注册当前的modal组件为全局组件
+//然后根据当前指令的vm.$root上，挂载已全局组册的组件，尝试！！结果是肯定不行的！只能挂载普通标签，组件是需要被vnode转化过的，变成标准的dom。

@@ -21,8 +21,11 @@ const dialogDirective: any = {
         const moduleName = el.getAttribute('module'); // 获取组件隶属主模块名称
         const dialogModifier = Object.keys(binding.modifiers).shift() || null; // 获取指令的修饰符 v-dialog.orderShipping.xxx中的orderShipping, 剔除xxx
         const vm = vnode.dirs[0].instance;  //当前VNode的父虚拟节点上下文环境
+        console.log(vm, '我想要的vm')
+        console.log(vnode, '我想要的vnode')
         if(moduleName && dialogModifier) {
           let moduleComponentContent = Yian.getComponent(moduleName, dialogModifier)
+          console.log(moduleComponentContent, '我想要的WallpaperSettings')
           if(moduleComponentContent) {
             const instance = Yian.getVue3Vm(modal, {
               value,

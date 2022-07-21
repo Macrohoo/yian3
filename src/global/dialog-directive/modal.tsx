@@ -11,7 +11,7 @@ const YaDialog = defineComponent({
     },
     //浮窗距离顶部的距离，单位是vh
     top: {
-      type: Number,
+      type: String,
       default: '15'
     },
     hideFooter: {
@@ -36,7 +36,7 @@ const YaDialog = defineComponent({
     return {
       visible: true,
       affirm: false,
-      customStyle: {"top": `${top}vh`},
+      customStyle: {"top": `${Number(this.top)}vh`},
     };
   },
   methods: {

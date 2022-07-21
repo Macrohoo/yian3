@@ -4,7 +4,7 @@ import { ConfigTy } from '~/base'
 import type { DefineComponent } from 'vue';
 //Component, ComputedOptions, MethodOptions
 import { createApp } from 'vue'
-// import { Modal } from 'ant-design-vue'
+// import Antd from 'ant-design-vue'
 
 export { default as createYian } from '@/createYian'
 export default abstract class Yian {
