@@ -27,7 +27,7 @@ const dialogDirective: any = {
           let moduleComponentContent = Yian.getComponent(moduleName, dialogModifier)
           console.log(moduleComponentContent, '我想要的WallpaperSettings')
           if(moduleComponentContent) {
-            const instance = Yian.getVue3Vm(modal, {
+            const instance = Yian.getVue3Vm('dialog', modal, {
               value,
               title,
               hideFooter,
@@ -37,16 +37,15 @@ const dialogDirective: any = {
               content: moduleComponentContent, // registed module component
               visible: true
             })
-            //const domDiv = vm.$root.$el.parentNode.appendChild(instance.$el); // Dom element after successful mounting
+            console.log(instance, 'instance!!!!!!!')
             // Monitor Remove Vue.property.$watch
-            instance.$watch('visible', () => {
-              //@ts-ignore
-              instance.visible = false;
-              vm.$root.$el.removeChild(instance.$el);
-              //@ts-ignore
-              if(instance.affirm && vm.hasOwnProperty('reload')) {
-                vm.reload() // If the context object routing for rendering template template needs to be overloaded
-              }
+            instance?.$watch('visible', () => {
+              document?.querySelector('.ant-modal-root')?.remove()
+              Yian.destoryVue3Vm('dialog', Yian.temporaryDialogVm) //destory application instance
+              // //@ts-ignore
+              // if(instance.affirm && vm.hasOwnProperty('reload')) {
+              //   vm.reload() // If the context object routing for rendering template template needs to be overloaded
+              // }
             });
 
           } else {
