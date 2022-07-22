@@ -37,12 +37,12 @@ const dialogDirective: any = {
               content: moduleComponentContent, // registed module component
               visible: true
             })
-            const domDiv = vm.$root.$el.parentNode.appendChild(instance.$el); // Dom element after successful mounting
+            //const domDiv = vm.$root.$el.parentNode.appendChild(instance.$el); // Dom element after successful mounting
             // Monitor Remove Vue.property.$watch
             instance.$watch('visible', () => {
               //@ts-ignore
               instance.visible = false;
-              vm.$root.$el.removeChild(domDiv);
+              vm.$root.$el.removeChild(instance.$el);
               //@ts-ignore
               if(instance.affirm && vm.hasOwnProperty('reload')) {
                 vm.reload() // If the context object routing for rendering template template needs to be overloaded

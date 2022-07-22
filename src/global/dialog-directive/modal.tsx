@@ -1,42 +1,40 @@
-import {
-  defineComponent
-} from "vue";
+import { defineComponent } from "vue";
 
 const YaDialog = defineComponent({
-  name: 'YaDialogModal',
+  name: "YaDialogModal",
   props: {
     title: {
       type: String,
-      default: '窗口名称'
+      default: "窗口名称",
     },
     //浮窗距离顶部的距离，单位是vh
     top: {
       type: String,
-      default: '15'
+      default: "15",
     },
     hideFooter: {
       type: Boolean,
-      default: true
+      default: true,
     },
     width: {
-      type:String,
-      default: '730'
+      type: String,
+      default: "730",
     },
     okText: {
       type: String,
-      default: '确定'
+      default: "确定",
     },
     // vue.2 ComponentConstructor构造函数 / vue.3 也能渲染注册过的组件
     content: {
-      type: [Object, Function]
+      type: [Object, Function],
     },
-    value: [Object, Number, String]
+    value: [Object, Number, String],
   },
   data() {
     return {
       visible: true,
       affirm: false,
-      customStyle: {"top": `${Number(this.top)}vh`},
+      customStyle: { top: `${Number(this.top)}vh` },
     };
   },
   methods: {
@@ -48,29 +46,45 @@ const YaDialog = defineComponent({
       try {
         //if promise existed
         //@ts-ignore
-        if(this.$refs.cpo!.submit) {
+        if (this.$refs.cpo!.submit) {
           //@ts-ignore
-          await this.$refs.cpo!.submit()
+          await this.$refs.cpo!.submit();
         }
         //@ts-ignore
-        await this.$refs.cpo.affirm(this);   // 关闭窗口交给子component
+        await this.$refs.cpo.affirm(this); // 关闭窗口交给子component
       } catch (error) {
-        console.error('affirm事件不存在[Please define affirm event in the component]!', error);
+        console.error(
+          "affirm事件不存在[Please define affirm event in the component]!",
+          error
+        );
       }
     },
     //if promise need waited post
-    async waitPost() {
-
-    }
+    async waitPost() {},
   },
   render() {
-    const { title, hideFooter, customStyle, width, okText, content, value } = this
-    return(
-      <a-modal dialogClass={'ya-dialog'} bodyStyle={customStyle} vModel_visible={this.visible} title={title} width={width} footer={hideFooter ? null : 'true'} okText={okText} on-ok="handleOk" on-cancel="handleCancel">
-        <component ref="cpo" is={content} v-model={value}></component>
+    const { title, hideFooter, customStyle, width, okText } = this;
+    const amodalProps: any = {
+      title: title,
+      width: Number(width),
+      okText: okText,
+    };
+    if (hideFooter) {
+      amodalProps.footer = null;
+    }
+    return (
+      <a-modal
+        class="ya-dialog"
+        vModel_visible={this.visible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+        style={customStyle}
+        {...amodalProps}
+      >
+        <div>kkk!!!!!!!!!!!!!</div>
       </a-modal>
-    )
-  }
-})
+    );
+  },
+});
 
-export default YaDialog
+export default YaDialog;
