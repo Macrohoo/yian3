@@ -1,4 +1,5 @@
-import { defineComponent } from "vue";
+import { defineComponent, resolveDynamicComponent } from "vue";
+import type { DefineComponent } from 'vue';
 
 const YaDialog = defineComponent({
   name: "YaDialogModal",
@@ -38,6 +39,10 @@ const YaDialog = defineComponent({
     };
   },
   methods: {
+    eventProps<T>(value: T) :void{
+      //@ts-ignore
+      this.$refs.cpo.props.value = value
+    },
     handleCancel() {
       this.visible = false;
     },
@@ -45,13 +50,10 @@ const YaDialog = defineComponent({
       this.affirm = true;
       try {
         //if promise existed
-        //@ts-ignore
-        if (this.$refs.cpo!.submit) {
-          //@ts-ignore
-          await this.$refs.cpo!.submit();
+        if ((this.$refs.cpo as {submit: Function}).submit) {
+          await (this.$refs.cpo as {submit: Function}).submit();
         }
-        //@ts-ignore
-        await this.$refs.cpo.affirm(this); // 关闭窗口交给子component
+        await (this.$refs.cpo as {affirm: Function}).affirm(this); // 关闭窗口交给子component
       } catch (error) {
         console.error(
           "affirm事件不存在[Please define affirm event in the component]!",
@@ -60,10 +62,10 @@ const YaDialog = defineComponent({
       }
     },
     //if promise need waited post
-    async waitPost() {},
+    async waitPost() {}
   },
   render() {
-    const { title, hideFooter, customStyle, width, okText } = this;
+    const { title, hideFooter, customStyle, width, okText, content, value } = this;
     const amodalProps: any = {
       title: title,
       width: Number(width),
@@ -72,6 +74,9 @@ const YaDialog = defineComponent({
     if (hideFooter) {
       amodalProps.footer = null;
     }
+    //app.component('string') === resolveDynamicComponent('string' | resolved component) === () => import('xxx.vue') templated
+    //all return resolved component
+    const ResolvedComponent = resolveDynamicComponent(content) as DefineComponent<{}, {}, any>
     return (
       <a-modal
         class="ya-dialog"
@@ -81,7 +86,7 @@ const YaDialog = defineComponent({
         style={customStyle}
         {...amodalProps}
       >
-        <div>kkk!!!!!!!!!!!!!</div>
+        <ResolvedComponent ref="cpo" {...{value}} />
       </a-modal>
     );
   },

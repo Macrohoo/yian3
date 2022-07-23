@@ -25,7 +25,6 @@ const dialogDirective: any = {
         console.log(vnode, '我想要的vnode')
         if(moduleName && dialogModifier) {
           let moduleComponentContent = Yian.getComponent(moduleName, dialogModifier)
-          console.log(moduleComponentContent, '我想要的WallpaperSettings')
           if(moduleComponentContent) {
             const instance = Yian.getVue3Vm('dialog', modal, {
               value,
@@ -42,10 +41,11 @@ const dialogDirective: any = {
             instance?.$watch('visible', () => {
               document?.querySelector('.ant-modal-root')?.remove()
               Yian.destoryVue3Vm('dialog', Yian.temporaryDialogVm) //destory application instance
-              // //@ts-ignore
-              // if(instance.affirm && vm.hasOwnProperty('reload')) {
-              //   vm.reload() // If the context object routing for rendering template template needs to be overloaded
-              // }
+              //todo 销毁内置组件
+              //@ts-ignore
+              if(instance.affirm && vm.hasOwnProperty('reload')) {
+                vm.reload() // If the context object routing for rendering template template needs to be overloaded
+              }
             });
 
           } else {
@@ -57,16 +57,16 @@ const dialogDirective: any = {
       })
     },
 
-    // 需要考虑到vnode更新的情况(这种是vnode更新，但是按钮组件并没有销毁重建的情况，那我们需要去触发这个钩子来对store中的数据进行重新赋值)
-    // 因为可能传入的value是一个变动的值，需要更新_store中的值
+    // 需要考虑到vnode更新的情况(这种是vnode更新，但是按钮组件并没有销毁重建的情况，我们需要对value这个props重新赋值)
+    // todo
     //@ts-ignore
     beforeUpdate(el, binding, vnode, prevNode) {
-      if(binding.value && vnode.props.id) {
-        delete dialogDirective._store[prevNode.props.id]
-        dialogDirective._store[vnode.props.id] = binding.value
-      } else {
-        delete dialogDirective._store[prevNode.props.id]
-      }
+      //console.log(el, binding, vnode, prevNode, 'beforeUpdate~~~~~~~~~')
+      //@ts-ignore
+      // Yian.temporaryDialogVm._component.methods.eventProps({
+      //   az: vnode.dirs[0].instance.az,
+      //   bz: vnode.dirs[0].instance.bz
+      // })
     }
   }
 }

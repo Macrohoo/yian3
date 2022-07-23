@@ -24,7 +24,7 @@
 | hideFooter | 非必须unnecessary | Boolean | false | 是否隐藏页脚 |
 | okText | 非必须unnecessary | String | 确定 | 确认按钮文字修改 |
 | width | 非必须unnecessary | Number | 730px | 弹窗体宽度 |
-| top | 非必须unnecessary | String | 15 | 弹窗体距顶高度，单位vh |
+| top | 非必须unnecessary | Number | 15 | 弹窗体距顶高度，单位vh |
 
 #### ❤️ 弹窗内部组件示例
 
