@@ -58,10 +58,7 @@ const dialogDirective: any = {
     // dialogComponentValue is a reactive object must be changed
     // @ts-ignore
     beforeUpdate(el, binding, vnode, prevNode) {
-      Yian.dialogComponentValue[vnode.props.id] = {
-        a: vnode.dirs[0].instance.az,
-        b: vnode.dirs[0].instance.bz
-      }
+      Yian.dialogComponentValue[vnode.props.id] = binding.value
     }
   }
 }

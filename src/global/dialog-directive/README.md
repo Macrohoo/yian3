@@ -19,7 +19,8 @@
 | 属性    |  可选性  |    类型  | 默认值   | 作用     |
 |---------|---------|---------|---------|---------|
 | id | 必须necessary | String | —— | key值，区别于其他按钮指令弹窗 |
-| v-dialog.[xxx] | 必须necessary | —— | —— | .[xxx]中的值，必须跟Yian.setComponent方法中的第二个参数一致 |
+| v-dialog.[xxx] | 必须necessary | —— | —— | [xxx]的值，必须跟Yian.setComponent方法中的第二个参数一致 |
+| `v-dialog.[xxx] = value` 传递给指令的值 | 非必须unnecessary | any | {} | 传给dialog内部子组件的值，支持变化的数据传入 |
 | module | 必须necessary | String | —— | 隶属模块名称，必须跟Yian.setComponent方法中的第一个参数一致 |
 | title | 非必须unnecessary | String | 操作窗口 | 弹窗体标题 |
 | hideFooter | 非必须unnecessary | Boolean | false | 是否隐藏页脚 |
@@ -38,7 +39,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  props: ['value'],    //props须写成这样才能传入值
+  //必须这么写才能传入v-dialog.orderShipping的value，且value已支持响应式
+  props: ['value'],
   methods: {
     //beforeSubmit 点击确定按钮前，有需要的异步请求
     async beforeSubmit() {}
