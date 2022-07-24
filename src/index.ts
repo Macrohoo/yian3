@@ -3,12 +3,13 @@ import { ConfigTy, Maybe } from '~/base'
 
 import type { DefineComponent } from 'vue';
 //Component, ComputedOptions, MethodOptions
-import { createApp, App } from 'vue'
+import { createApp, App, reactive } from 'vue'
 import Antd from 'ant-design-vue'
 
 export { default as createYian } from '@/createYian'
 export default abstract class Yian {
   static components: Record<string, DefineComponent<any, any, any, any, any, any, any, any, any, any, any>> = {}
+  static dialogComponentValue: Record<string, any> = reactive({})
   static install: Function
   static temporaryDialogVm: Maybe<App>
 

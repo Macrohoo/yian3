@@ -1,9 +1,11 @@
 import { defineComponent, resolveDynamicComponent } from "vue";
 import type { DefineComponent } from 'vue';
+import Yian from '@/index'
 
 const YaDialog = defineComponent({
   name: "YaDialogModal",
   props: {
+    id: String,
     title: {
       type: String,
       default: "窗口名称",
@@ -26,47 +28,29 @@ const YaDialog = defineComponent({
       default: "确定",
     },
     // vue.2 ComponentConstructor构造函数 / vue.3 也能渲染注册过的组件
-    content: {
-      type: [Object, Function],
-    },
-    value: [Object, Number, String],
+    content: [Object, Function]
   },
   data() {
     return {
       visible: true,
-      affirm: false,
       customStyle: { top: `${Number(this.top)}vh` },
     };
   },
   methods: {
-    eventProps<T>(value: T) :void{
-      //@ts-ignore
-      this.$refs.cpo.props.value = value
-    },
     handleCancel() {
       this.visible = false;
     },
     async handleOk() {
-      this.affirm = true;
-      try {
-        //if promise existed
-        if ((this.$refs.cpo as {submit: Function}).submit) {
-          await (this.$refs.cpo as {submit: Function}).submit();
-        }
-        console.log(this.$refs.cpo, 'cpo')
-        await (this.$refs.cpo as {affirm: Function}).affirm(this); // 关闭窗口交给子component
-      } catch (error) {
-        console.error(
-          "affirm事件不存在[Please define affirm event in the component]!",
-          error
-        );
+      this.visible = false
+      //if beforeSubmit promise existed
+      if ((this.$refs.cpo as {beforeSubmit: Function}).beforeSubmit) {
+        await (this.$refs.cpo as {beforeSubmit: Function}).beforeSubmit();
       }
-    },
-    //if promise need waited post
-    async waitPost() {}
+    }
   },
   render() {
-    const { title, hideFooter, customStyle, width, okText, content, value } = this;
+    const { title, hideFooter, customStyle, width, okText, content, id } = this;
+    const value = Yian.dialogComponentValue[id!]
     const amodalProps: any = {
       title: title,
       width: Number(width),

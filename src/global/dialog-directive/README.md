@@ -1,14 +1,15 @@
 ## 🐙 使用 v-dialog 指令打开弹窗体
 
 ```html
-//Vue Click事件标签处使用v-popup指令案例
+//Vue Click事件标签处使用v-dialg指令案例
 <div v-for="(item, index) in List" :key="index">
   <a-button
     id="`${index}-order-shipping`"
     v-dialog.orderShipping="{a:index, b:item}"
     type="primary"
     module="order"
-    width="1200"
+    width=1200
+    top=40
     >发货</a-button
   >
 </div>
@@ -23,7 +24,7 @@
 | title | 非必须unnecessary | String | 操作窗口 | 弹窗体标题 |
 | hideFooter | 非必须unnecessary | Boolean | false | 是否隐藏页脚 |
 | okText | 非必须unnecessary | String | 确定 | 确认按钮文字修改 |
-| width | 非必须unnecessary | Number | 730px | 弹窗体宽度 |
+| width | 非必须unnecessary | Number | 730 | 弹窗体宽度，单位px |
 | top | 非必须unnecessary | Number | 15 | 弹窗体距顶高度，单位vh |
 
 #### ❤️ 弹窗内部组件示例
@@ -37,16 +38,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
-  //props须写成这样才能传入值
-  props: ['value'],
+  props: ['value'],    //props须写成这样才能传入值
   methods: {
-    //affirm事件必须写上，此方法已与确认按钮耦合。
-    async affirm(vlm) {
-      await this.subimt()
-      vlm.handleCancel();  //handleClosed方法控制el-dialog窗口关闭
-    },
-    //subimt 点击确定按钮时，有需要的异步请求
-    async subimt() {}
+    //beforeSubmit 点击确定按钮前，有需要的异步请求
+    async beforeSubmit() {}
   },
 });
 </script>
@@ -57,23 +52,23 @@ export default defineComponent({
 src
 ├── layout //公共布局
 ├── router //vue-router
-│   └── index.js
+│   └── index.ts
 ├── store //piana
-│   └── index.js
+│   └── index.ts
 ├── styles //公共样式
 │   └── ....scss
 ├── icons  //icons目录
 │   ├── common
 │   │   └── xx.svg
 │   └── js
-│       └── symbolIcon.js
+│       └── symbolIcon.ts
 ├── components //公用组件
 │   └── ....vue
 ├── views  //页面
-│   └── order  //隶属模块名
-│       ├── components //隶属模块子组件
-│       │   └── orderShipping.vue
-│       └── index.js
+├── modules  //dialog内部组件模块存放位置
+│   ├── order  //隶属模块名
+│   │   └── orderShipping.vue  //隶属模块子组件
+│   └── index.ts 模块注册
 ├── App.vue
 └── main.ts
 ```
@@ -82,9 +77,9 @@ src
 > - 隶属模块成块导出注册
 ```typescript
 import Yian from 'yian';
-import orderShipping from './components/orderShipping.vue';
+import orderShipping from './order/orderShipping.vue';
 
-export default function registerOrder() {
+export default function registerModules() {
   //参数一、参数二 与属性列表中的 module 和 v-popup.[xxx] 指令修饰符需一致
   Yian.setComponent('order', 'orderShipping', orderShipping);
 }
@@ -93,16 +88,14 @@ export default function registerOrder() {
 
 ```javascript
 //放在main.ts最下面
-import registerOrder from '@/views/order/index.js';
+import registerModules from '@/modules/index.ts';
 
-registerOrder()
+registerModules()
 ```
 
 
 
-//记录一下思路
-//方案一：当时考虑的是在指令click的时候注册当前的modal组件为全局组件，然后根据当前指令的vm.$root上，挂载已全局组册的组件，尝试！！结果是肯定不行的！只能挂载普通标签，组件是需要被vnode转化过的，变成标准的dom。
+### 设计的思路
 
-//方案二：依旧采用modal的vm生成方式直接mount。需要一点点改。。这里和vue2有点不同，因为vue2中是Vue.use实现的，vm生成时是有项目组件库use的环境的，但在Vue3中需要单独use组件库。而且目前来看element甚至无法直接use自己的modal。antd可以，但无需自定义挂载。
-
-//延伸出：借助组合api的方式，利用内部组件实例的config.globalProperties下的暴露出来的自己的核心yian库上的属性，我去暂存起来想要的props，不再通过父子组件间的传值获得，但需要注意本身props可能存在的默认值。在其他地方是否可以利用。
+>- 方案一：当时考虑的是在指令click的时候注册当前的modal组件为全局组件，然后根据当前指令的vm.$root上，挂载已全局组册的组件，尝试！！结果是肯定不行的！只能挂载普通标签，组件是需要被vnode转化过的，变成标准的dom。
+>- 方案二：依旧采用modal的vm生成方式直接mount。需要一点点改。。这里和vue2有点不同，因为vue2中是Vue.use实现的，vm生成时是有项目组件库use的环境的，但在Vue3中需要单独use组件库。而且目前来看element甚至无法直接use自己的modal。antd可以，但无需自定义挂载。
