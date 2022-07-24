@@ -40,7 +40,6 @@ export default abstract class Yian {
     const key = moduleName + '_' + dialogModifier;
     this.components[key] = component
     //register component
-
   }
 
   static getVue3Vm(type: string, componentModal: any, props?: any) {

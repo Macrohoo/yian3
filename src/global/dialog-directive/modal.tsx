@@ -53,6 +53,7 @@ const YaDialog = defineComponent({
         if ((this.$refs.cpo as {submit: Function}).submit) {
           await (this.$refs.cpo as {submit: Function}).submit();
         }
+        console.log(this.$refs.cpo, 'cpo')
         await (this.$refs.cpo as {affirm: Function}).affirm(this); // 关闭窗口交给子component
       } catch (error) {
         console.error(

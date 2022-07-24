@@ -39,12 +39,12 @@ const dialogDirective: any = {
             console.log(instance, 'instance!!!!!!!')
             // Monitor Remove Vue.property.$watch
             instance?.$watch('visible', () => {
-              document?.querySelector('.ant-modal-root')?.remove()
-              Yian.destoryVue3Vm('dialog', Yian.temporaryDialogVm) //destory application instance
-              //todo 销毁内置组件
+              Yian.destoryVue3Vm('dialog', Yian.temporaryDialogVm)
+              //destory application instance
+              //needn't to use document?.querySelector('.ant-modal-root')?.remove() agian
               //@ts-ignore
-              if(instance.affirm && vm.hasOwnProperty('reload')) {
-                vm.reload() // If the context object routing for rendering template template needs to be overloaded
+              if(instance.affirm && vm.$root.reload !== undefined) {
+                vm.$root.reload() // If the context object routing for rendering template template needs to be overloaded
               }
             });
 
