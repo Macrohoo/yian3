@@ -47,7 +47,7 @@ const dialogDirective: any = {
             });
 
           } else {
-            console.error('弹窗内容组件未注册!');
+            console.error('弹窗内容子组件未注册!');
           }
         } else {
           console.error('module属性名称或v-dialog指令修饰符不能为空!');

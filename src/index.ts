@@ -1,9 +1,9 @@
 import YianConstructor from '@/constructor'
 import { ConfigTy, Maybe } from '~/base'
 
-import type { DefineComponent } from 'vue';
+import type { DefineComponent, App } from 'vue';
 //Component, ComputedOptions, MethodOptions
-import { createApp, App, reactive } from 'vue'
+import { createApp, reactive } from 'vue'
 import Antd from 'ant-design-vue'
 
 export { default as createYian } from '@/createYian'
@@ -12,11 +12,13 @@ export default abstract class Yian {
   static dialogComponentValue: Record<string, any> = reactive({})
   static install: Function
   static temporaryDialogVm: Maybe<App>
+  static projectVm: Maybe<App>
 
   static _validator: WeakMap<object, any> = new WeakMap()
   static _upload: boolean = false
 
   static content(config: ConfigTy = {}) {
+    this.projectVm = config.app
     return this.getProxy(config)
   }
 
@@ -48,6 +50,8 @@ export default abstract class Yian {
     const instance = createApp(componentModal, props)
     if(type.toLowerCase() === 'dialog') {
       this.temporaryDialogVm = instance
+      //first we should inject app config globalProperties into dialog instance
+      Object.assign(this.temporaryDialogVm.config.globalProperties, this.projectVm?.config.globalProperties)
       //after mounted on div is vm, return instance object has $attributes
       return instance.use(Antd).mount(document.createElement('div'))
     }

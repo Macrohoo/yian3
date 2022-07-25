@@ -29,7 +29,9 @@
 | top | 非必须unnecessary | Number | 15 | 弹窗体距顶高度，单位vh |
 
 #### ❤️ 弹窗内部组件示例
-
+❗️注意：
+1、原则上本组件setup中getCurrentInstance()并不是项目app内部组件实例。
+2、但为写代码便利，继承了app内部组件实例appContext.config.globalProperties属性。
 ```html
 //orderShipping组件内容
 <template>
@@ -45,6 +47,10 @@ export default defineComponent({
     //beforeSubmit 点击确定按钮前，有需要的异步请求
     async beforeSubmit() {}
   },
+  setup () {
+    console.log(getCurrentInstance()?.appContext.config.globalProperties, '😄')
+    return {}
+  }
 });
 </script>
 ```
