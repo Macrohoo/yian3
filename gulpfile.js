@@ -13,7 +13,7 @@ const cjsConfigfunction = require('./tools/getCjsConfig')
 const tsFiles = ['src/**/*.ts', 'src/**/*.tsx', '!node_modules/**/*.*', 'typings/**/*.d.ts'];
 
 gulp.task('tsc-es', () => {
-    rimraf.sync(path.join(cwd, 'es'));
+    rimraf.sync(path.join(cwd, 'es'));   //remove file when gulp again
     return gulp.src(tsFiles)
     .pipe(sourcemaps.init({loadMaps: true}))    //To load existing source maps
     .pipe(alias({
@@ -71,3 +71,43 @@ gulp.task('img-base64' , function(){
         outPath:"src/icons/imgJson.json"
     }))
 });
+
+
+const babel = require('gulp-babel');
+gulp.task('babel-es', () => {
+  return gulp.src("./es/**/*.jsx").
+  pipe(babel({
+    presets: [
+      [
+        "@babel/preset-env",
+        {
+          modules: false,
+          targets: {
+            browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'not ie 11'],
+          },
+        },
+      ]
+    ],
+    plugins: ['@vue/babel-plugin-jsx']
+  })).
+  pipe(gulp.dest('es'));
+})
+
+gulp.task('babel-cjs', () => {
+  return gulp.src("./es/**/*.jsx").
+  pipe(babel({
+    presets: [
+      [
+        "@babel/preset-env",
+        {
+          modules: 'commonjs',
+          targets: {
+            browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'not ie 11'],
+          },
+        },
+      ]
+    ],
+    plugins: ['@vue/babel-plugin-jsx']
+  })).
+  pipe(gulp.dest('lib'));
+})

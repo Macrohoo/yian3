@@ -16,12 +16,14 @@
   ],
   "scripts": {
     "lint": "eslint --fix --ext .js,.vue src",
-    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs && npm run build:style && npm run assets-copy",
+    "build": "vue-tsc --noEmit && webpack --config build/webpack.config.js && npm run esm && npm run cjs && npm run build:style && npm run assets-copy && npm run build:babel-es-jsx && npm run build:babel-cjs-jsx",
     "esm": "gulp tsc-es",
     "cjs": "gulp tsc-cjs",
     "build:style": "gulp build-style",
     "build:image": "gulp img-base64",
-    "assets-copy": "gulp es-copy && gulp cjs-copy"
+    "assets-copy": "gulp es-copy && gulp cjs-copy",
+    "build:babel-es-jsx": "gulp babel-es",
+    "build:babel-cjs-jsx": "gulp babel-cjs"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "6.1.0",
@@ -39,6 +41,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^9.1.1",
     "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "gulp-copy": "^4.0.1",
     "gulp-path-alias": "^1.2.1",
     "gulp-sass": "^5.1.0",

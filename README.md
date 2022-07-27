@@ -31,7 +31,9 @@ declare module "@vue/runtime-core" {
 }
 ```
 
-#### 🔥[ya-checkbox组件](https://github.com/Macrohoo/yian3/tree/master/src/components/ya-checkbox)
-#### 🔥[v-dialog指令](https://github.com/Macrohoo/yian3/tree/master/src/global/dialog-directive)
+## 🧊 Component
+>- ## [ya-checkbox](https://github.com/Macrohoo/yian3/tree/master/src/components/ya-checkbox)
+### 🔥 Directive
+>- ## [v-dialog](https://github.com/Macrohoo/yian3/tree/master/src/global/dialog-directive)
 
-#### todo
+## todo
