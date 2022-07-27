@@ -21,3 +21,17 @@ const $_Y = {
 app.use(createYian as any, $_Y)
 
 ```
+```typescript
+//global.d.ts 全局声明文件
+export {}
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $yian: typeof import('yian3')
+  }
+}
+```
+
+#### 🔥[ya-checkbox组件](https://github.com/Macrohoo/yian3/tree/master/src/components/ya-checkbox)
+#### 🔥[v-dialog指令](https://github.com/Macrohoo/yian3/tree/master/src/global/dialog-directive)
+
+#### todo
