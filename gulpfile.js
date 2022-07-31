@@ -94,7 +94,7 @@ gulp.task('babel-es', () => {
 })
 
 gulp.task('babel-cjs', () => {
-  return gulp.src("./es/**/*.jsx").
+  return gulp.src("./lib/**/*.jsx").
   pipe(babel({
     presets: [
       [

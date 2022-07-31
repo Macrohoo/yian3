@@ -1,7 +1,9 @@
 import utils from '@/utils/utils'
+import cache from './axiosCache'
 
 import { AxiosOptionsTy } from '~/axios'
 import { ConfigTy } from '~/base'
+
 
 
 export default class YianConstructor {
@@ -26,9 +28,9 @@ export default class YianConstructor {
         method,
         ...data,
         headers,
-        // adapter: cache({
-        //   time: 1000
-        // })
+        adapter: cache({
+          time: 1000
+        })
       }).then((res: any) => {
         resolve(res);
       }).catch((err: any) => {

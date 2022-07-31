@@ -74,5 +74,8 @@
     "component",
     "components",
     "antd"
-  ]
+  ],
+  "dependencies": {
+    "nanoid": "^4.0.0"
+  }
 }

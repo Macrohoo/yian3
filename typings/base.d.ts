@@ -6,3 +6,8 @@ export interface ConfigTy {
 }
 
 export type Maybe<T> = T | undefined | null
+
+
+export interface baseObjTy {
+  [propName: string | number]: any
+}
