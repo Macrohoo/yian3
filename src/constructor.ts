@@ -17,8 +17,14 @@ export default class YianConstructor {
     this.utils = utils
   }
 
-  axios<T>(options: AxiosOptionsTy) :Promise<T>{
-    const { url, params, method, headers = {'content-type': 'application/json'} } = options;
+  axios<T>(options: AxiosOptionsTy, version?: number) :Promise<T>{
+    let { url, params, method, headers = {'content-type': 'application/json'} } = options;
+    if(version && this.baseApi) {
+      url = this.baseApi[version] + '/' + url
+    }
+    if(!version && this.baseApi) {
+      url = this.baseApi[0] + '/' + url
+    }
     return new Promise((resolve, reject) => {
       let data = {};
       if (method.toLowerCase() === 'get') data = { params };
