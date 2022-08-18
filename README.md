@@ -80,4 +80,10 @@ export default defineComponent({
 });
 ```
 
-👉[Documentation文档](https://doc.mboke.top/)
+## 👉[Documentation文档](https://doc.mboke.top/)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2022-present, Macrohoo
