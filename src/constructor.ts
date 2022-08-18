@@ -18,7 +18,7 @@ export default class YianConstructor {
   }
 
   axios<T>(options: AxiosOptionsTy, version?: number) :Promise<T>{
-    let { url, params, method, headers = {'content-type': 'application/json'} } = options;
+    let { url, params, method, headers = {'content-type': 'application/json'}, expireInfo } = options;
     if(version && this.baseApi) {
       url = this.baseApi[version] + '/' + url
     }
@@ -27,17 +27,23 @@ export default class YianConstructor {
     }
     return new Promise((resolve, reject) => {
       let data = {};
-      if (method.toLowerCase() === 'get') data = { params };
-      if (method.toLowerCase() === 'post' || method.toLowerCase() === 'put' || method.toLowerCase() === 'delete') data = { data: params };
-      this.interceptor({
+      if (method.toLowerCase() === 'get' && params) data = { params };
+      if ((method.toLowerCase() === 'post' || method.toLowerCase() === 'put' || method.toLowerCase() === 'delete') && params) data = { data: params };
+      let axiosBody = {
         url,
         method,
-        ...data,
         headers,
         adapter: cache({
           time: 1000
         })
-      }).then((res: any) => {
+      }
+      if(expireInfo) {
+        Object.assign(axiosBody, {expireInfo})
+      }
+      if(Object.keys(data).length > 0) {
+        Object.assign(axiosBody, {...data})
+      }
+      this.interceptor(axiosBody).then((res: any) => {
         resolve(res);
       }).catch((err: any) => {
         reject(err);

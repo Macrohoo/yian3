@@ -1,5 +1,7 @@
-## 🐙 使用 ya-checkbox 组件
-#### 💥 标签attribute 属性列表
+# `ya-checkbox`
+
+## 🐙 使用 `ya-checkbox` 组件
+### 🧊 标签attribute 属性列表
 | 属性     |  可选性  |   类型  |  默认值  |   作用   |
 |---------|---------|---------|---------|---------|
 |selectedData|必须necessary|Array|——|指定已选中的选项|
@@ -10,7 +12,7 @@
 |srcWidth|非必须unnecessary|Number|64px|链接图宽度|
 |srcHeight|非必须unnecessary|Number|64px|链接图长度|
 
-#### 💥 标签Events 事件列表
+### 🧊 标签Events 事件列表
 
 |事件名称  |说明  |回调参数 Function(checkedValue)  |
 |---------|---------|---------|
@@ -18,7 +20,7 @@
 
 ![组件形态](https://kodo.mboke.top/ya-checkbox.gif)
 
-#### ❤️ ya-checkbox组件示例
+### 🧊 `ya-checkbox`组件示例
 ```html
 <ya-checkbox
   @selectX="(checkedValue) => (selectMaterials = checkedValue)"
