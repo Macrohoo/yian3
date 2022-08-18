@@ -33,12 +33,14 @@ declare module "@vue/runtime-core" {
 }
 ```
 
-### 🧊 嵌入axios，加设 1000ms 内重复请求限制
-#### 属性列表
+### 🎩 嵌入axios，加设 1000ms 内重复请求限制
+#### 🧊 属性列表
+| 属性    |  可选性  |    类型  | 默认值   | 作用     |
+|---------|---------|---------|---------|---------|
 | url | 必须necessary | String | - | 请求链接 |
 | method | 必须necessary | String | - | 请求方法 |
 | headers | 非必须unnecessary | String | {'content-type': 'application/json'} | 请求类型 |
-| params | 非必须unnecessary | Object |- | 请求参数 |
+| params | 非必须unnecessary | Object | - | 请求参数 |
 | expireInfo | 非必须unnecessary | Object | - | 请求过期判断相关的信息 |
 ```typescript
 export default defineComponent({
