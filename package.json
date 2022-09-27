@@ -1,9 +1,14 @@
 {
   "name": "yian3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue3 super hooks",
   "author": "Macrohoo",
   "license": "MIT",
+  "homepage": "https://doc.mboke.top/yian3/yian3.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Macrohoo/yian3"
+  },
   "main": "lib/index.js",
   "module": "es/index.js",
   "unpkg": "dist/yian.min.js",
