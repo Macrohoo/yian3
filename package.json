@@ -1,6 +1,6 @@
 {
   "name": "yian3",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "vue3 super hooks",
   "author": "Macrohoo",
   "license": "MIT",
@@ -16,6 +16,7 @@
   "files": [
     "lib",
     "es",
+    "dist",
     "index.d.ts",
     "typings"
   ],
